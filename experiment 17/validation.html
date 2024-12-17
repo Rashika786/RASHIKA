@@ -1,0 +1,131 @@
+<html>
+<body>
+<h2><center><u>FORM</u></center></h2>
+<form name="form" action="a.html" method="POST" onsubmit="return validateForm()">
+<body bgcolor="mediumseagreen">
+<fieldset>
+<legend><i>PERSONAL INFORMATION</i></legend>
+<label for="firstName">First Name:</label>
+<input type="text" id="firstName" name="firstName" required><br><br>
+<label for="lastName">Last Name:</label>
+<input type="text" id="lastName" name="lastName" required><br><br>
+<label for="dob">Date of Birth:</label>
+<input type="date" id="dob" name="dob" required><br><br>
+<label for="gender">Gender:</label>
+<input type="radio" id="male" name="gender" value="Male" required> Male
+<input type="radio" id="female" name="gender" value="Female" required> Female
+<input type="radio" id="other" name="gender" value="Other" required> Other<br><br>
+</fieldset>
+<fieldset>
+<legend><i>CONTACT INFORMATION</i></legend>
+<label for="email">Email Address:</label>
+<input type="email" id="email" name="email" required><br><br>
+<label for="mob">Mob No:</label>
+<input type="text" id="mob" name="mob" required><br><br>
+<label for="address">Home Address:</label><br>
+<textarea id="address" name="address" rows="4" cols="50" required></textarea><br><br>
+<label for="city">City:</label>
+<input type="text" id="city" name="city" required><br><br>
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" required><br><br>
+<label for="cpassword">Confirm Password:</label>
+<input type="password" id="cpassword" name="cpassword" required><br><br>
+<input type="submit" value="Submit">
+<input type="reset" value="Reset"/><br>
+</fieldset>
+</form>
+
+<script>
+function validateForm() {
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var email = document.form.email.value;
+    var at = email.indexOf("@");
+    var dot = email.lastIndexOf(".");
+    var mob = document.form.mob.value;
+    var password = document.form.password.value;
+    var cpassword = document.form.cpassword.value;
+    var dob = document.form.dob.value;
+    var today = new Date().toISOString().split('T')[0];
+    var address = document.form.address.value;
+    var city = document.form.city.value;
+
+    if (firstName == "") {
+        alert("Enter first Name.");
+        document.form.firstName.focus();
+        return false;
+    }
+
+    if (lastName == "") {
+        alert("Enter Last Name.");
+        document.form.lastName.focus();
+        return false;
+    }
+
+    if (email == "") {
+        alert("Enter Email ID.");
+        document.form.email.focus();
+        return false;
+    } else if (at < 1 || dot < at + 2 || dot + 2 > email.length) {
+        alert("Please enter a valid email address!");
+        document.form.email.focus();
+        return false;
+    }
+
+    if (mob == "") {
+        alert("Enter Mobile Number");
+        document.form.mob.focus();
+        return false;
+    } else if (isNaN(mob)) {
+        alert("Please enter a valid Mobile Number");
+        document.form.mob.focus();
+        return false;
+    } else if (mob.length != 10) {
+        alert("Enter mobile number with 10 digits");
+        document.form.mob.focus();
+        return false;
+    }
+
+    if (password == "") {
+        alert("Enter the Password.");
+        return false;
+    } else if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+    }
+
+    if (cpassword == "") {
+        alert("Confirm the Password.");
+        return false;
+    } else if (cpassword != password) {
+        alert("Password and Confirm Password must be the same.");
+        return false;
+    }
+
+    if (dob == "") {
+        alert("Enter Date of Birth.");
+        document.form.dob.focus();
+        return false;
+    } else if (dob > today) {
+        alert("Date of Birth cannot be in the future.");
+        document.form.dob.focus();
+        return false;
+    }
+
+    if (address == "") {
+        alert("Enter the address.");
+        document.form.address.focus();
+        return false;
+    }
+
+    if (city == "") {
+        alert("Enter your city.");
+        document.form.city.focus();
+        return false;
+    }
+
+    return true;
+}
+</script>
+</body>
+</html>
